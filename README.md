@@ -1,7 +1,7 @@
 # pyyaml-flatten-lists-tag
 
 ## Background
-This is a small module illustrating implementation of a `!FlattenLists` custom YAML tag to render a list-of-lists value as a single list value. Its primary use is in handling the non-native YAML use case of defining a list of common values (which may be something other than scalars) as an anchor in a configuration, then needing to merge it with a specific list elsewhere due to external requirements of the configuration.
+This is a small module illustrating implementation of a `!FlattenLists` custom YAML tag, which renders a list-of-lists value as a single list. The most likely scenario addresses the non-native YAML use case of merging a list of common values from an anchor definition (which can be non-scalars) elsewhere in the configuration due to external requirements of the consuming script or application.
 
 As an example, consider a trivial YAML file of the form:
 ```
@@ -21,7 +21,7 @@ usage:
       - Key: Created
         Value: 20210806T1827
 ```
-to yield the following JSON representation:
+yielding this JSON representation:
 ```
 {
   "refs": {
@@ -62,7 +62,7 @@ to yield the following JSON representation:
 ## Installation
 *This will be verified Real Soon Now*...
 
-Install the module like any other, import it, and specify the `update_loader()` function for the optional `Loader` keyword in the `yaml.load()` call. Note that the implementation actually instantiates and augments `yaml.SafeLoader`, preserving the intent of the class.
+Install the module like any other, import it, and specify the `update_loader()` function for the optional `Loader` keyword in the `yaml.load()` call. Since the implementation instantiates and augments `yaml.SafeLoader`, intent is preserved.
 ```
 from  flatten_lists   import  tag_fx
 
@@ -71,7 +71,7 @@ yaml.load(data, Loader=tag_fx.update_loader())
 ```
 
 ## Build and Test
-A `Makefile` (gasp) controls operations; upload to a designated PyPi repo is not yet added; `make help` shows valid targets (which are so obvious you should be insulted).
+A `Makefile` (gasp) controls operations; upload to a designated PyPi repo is not yet added; `make help` shows valid targets (so obvious you might feel insulted lol).
 
 `unittest` is used out of laziness (and a desire to keep dependencies and setup minimal), and the build target is the default.
 
