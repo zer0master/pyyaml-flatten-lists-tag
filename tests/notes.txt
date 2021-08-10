@@ -1,0 +1,43 @@
+This code is pretty complicated, but perhaps a few things can be verified; this much appears true interactively...
+
+loader = update_loader()
+
+assert '!FlattenLists' in loader.yaml_constructors
+# True: no exception thrown
+
+assert loader.yaml_constructors['!FlattenLists'].__name__ == 'tag_handler'
+# True: no exception thrown
+
+all that's left is to use a enough of a yaml fragment to define an anchor with a list of items, and reference it as part
+of another value with the nested alias and an explicit nested list of similar items; load that from the string and examine
+the results compared to what's expected
+
+debatable whether markers/macros should discriminate between module functions (difficult to test owing to need to instantiate
+yaml-flavored objects: unit (first two asserts) vs functional (last)
+
+expected_tags = [
+  {'Key': 'Dept', 'Value': 'Something'},
+  {'Key': 'Division', 'Value': 'Else'},
+  {'Key': 'Name', 'Value': 'Bozo'},
+  {'Key': 'Age', 'Value': -1}]
+
+content = '''
+refs:
+  tags: &common
+    - Key: Dept
+      Value: Something
+    - Key: Division
+      Value: Else
+usage:
+  tags: !FlattenLists
+    - *common
+    - - Key: Name
+        Value: Bozo
+      - Key: Age
+        Value: -1
+'''
+loader = update_loader()
+info = yaml.load(content, Loader=loader)
+
+assert info['usage']['tags'] == expected_tags
+# True: no exception thrown
