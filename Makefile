@@ -9,10 +9,10 @@ PACKAGE_DIR := dist
 	build
 
 build: test
-	python3 -m build
+	@python3 -m build
 
 clean:
-	rm -Rf ${PACKAGE_DIR}/*
+	@rm -Rf ${PACKAGE_DIR}/*
 
 # probably cleaner way to do this...
 test:
