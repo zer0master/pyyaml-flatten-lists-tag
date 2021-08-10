@@ -1,7 +1,9 @@
 # pyyaml-flatten-lists-tag
-This is a small module supporting the !FlattenLists custom tag to render a list-of-lists value as a single list value; it's primary use is in handling the non-native YAML use acase of defining a list of common values (which may be something other than scalars) as an anchor in a configuration, and then needing to add it to a specific list elsewhere.
 
-As an example, a YAML file of the form:
+## Background
+This is a small module illustrating implementation of a `!FlattenLists` custom YAML tag to render a list-of-lists value as a single list value. Its primary use is in handling the non-native YAML use case of defining a list of common values (which may be something other than scalars) as an anchor in a configuration, then needing to merge it with a specific list elsewhere due to external requirements of the configuration.
+
+As an example, consider a trivial YAML file of the form:
 ```
 refs:
   tags: &common_tags
@@ -10,7 +12,7 @@ refs:
     - Key: Division
       Value: Hackers
 
-# the !FlattenLists custom tag expects nested lists as shown:
+# the !FlattenLists custom tag merges nested lists of the following form:
 usage:
   tags: !FlattenLists
     - *common_tags
@@ -56,7 +58,11 @@ to yield the following JSON representation:
   }
 }
 ```
-All that's required is to install the module, import it in the normal fashion, and specify the `update_loader()` function for the optional `Loader` keyword in the `yaml.load()` call. Note that the implementation actually instantiates and augments `yaml.SafeLoader`, preserving the intent of the class.
+
+## Installation
+*This will be verified Real Soon Now*...
+
+Install the module like any other, import it, and specify the `update_loader()` function for the optional `Loader` keyword in the `yaml.load()` call. Note that the implementation actually instantiates and augments `yaml.SafeLoader`, preserving the intent of the class.
 ```
 from  flatten_lists   import  tag_fx
 
