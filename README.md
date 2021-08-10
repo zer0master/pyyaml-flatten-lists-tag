@@ -69,3 +69,10 @@ from  flatten_lists   import  tag_fx
 # data is a file handle opened in read mode
 yaml.load(data, Loader=tag_fx.update_loader())
 ```
+
+## Build and Test
+A `Makefile` (gasp) controls operations; upload to a designated PyPi repo is not yet added; `make help` shows valid targets (which are so obvious you should be insulted).
+
+`unittest` is used out of laziness (and a desire to keep dependencies and setup minimal), and the build target is the default.
+
+
