@@ -75,4 +75,7 @@ A `Makefile` (gasp) controls operations; upload to a designated PyPi repo is not
 
 `unittest` is used out of laziness (and a desire to keep dependencies and setup minimal), and the build target is the default.
 
-
+## Future
+These are slated for implementation:
+* upload (with a custom target like a self-hosted PyPi or Artifactory host)
+* shakedown of the metadata (likely suspect as of this writing
