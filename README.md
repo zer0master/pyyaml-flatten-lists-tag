@@ -78,4 +78,5 @@ A `Makefile` (gasp) controls operations; upload to a designated PyPi repo is not
 ## Future
 These are slated for implementation:
 * upload (with a custom target like a self-hosted PyPi or Artifactory host)
-* shakedown of the metadata (likely suspect as of this writing
+* shakedown of the metadata (likely suspect as of this writing)
+* feasibility of registering multiple such handlers for different tags
